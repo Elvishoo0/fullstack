@@ -1,14 +1,17 @@
-# Imagen base de Java
+# Imagen base con Java 17
 FROM eclipse-temurin:17-jdk-alpine
 
-# Directorio de trabajo en el contenedor
+# Instalar Maven
+RUN apk add --no-cache maven
+
+# Directorio de trabajo
 WORKDIR /app
 
-# Copiar archivos del proyecto al contenedor
+# Copiar todo el proyecto
 COPY . .
 
-# Empaquetar el proyecto con Maven
-RUN ./mvnw package -DskipTests
+# Construcción sin ejecutar tests
+RUN mvn clean package -DskipTests
 
 # Ejecutar la app
 CMD ["java", "-jar", "target/demo-0.0.1-SNAPSHOT.jar"]
