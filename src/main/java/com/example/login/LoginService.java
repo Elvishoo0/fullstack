@@ -1,7 +1,6 @@
 package com.example.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,7 +15,7 @@ public class LoginService {
         Optional<Usuario> usuario = loginRepository.findByCorreo(correo);
 
         return usuario
-                .map(u -> BCrypt.checkpw(contrasenaPlano, u.getContrasena()))
+                .map(u -> contrasenaPlano.equals(u.getContrasena()))
                 .orElse(false);
     }
 }
