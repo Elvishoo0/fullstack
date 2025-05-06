@@ -15,7 +15,7 @@ public class LoginService {
         Optional<Usuario> usuario = loginRepository.findByCorreo(correo);
 
         return usuario
-                .map(u -> contrasenaPlano.equals(u.getContrasena()))
+                .map(u -> u.getContrasena().equals(contrasenaPlano))
                 .orElse(false);
     }
 }
